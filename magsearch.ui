@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1087</width>
+    <height>529</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MagSearch</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="input_lineedit">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>15</y>
+      <width>715</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="search_pushbutton">
+    <property name="geometry">
+     <rect>
+      <x>738</x>
+      <y>15</y>
+      <width>75</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>搜索</string>
+    </property>
+   </widget>
+   <widget class="QTreeWidget" name="result_treewidget">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>54</y>
+      <width>802</width>
+      <height>415</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <attribute name="headerVisible">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="headerCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="headerDefaultSectionSize">
+     <number>200</number>
+    </attribute>
+    <attribute name="headerHighlightSections">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="headerShowSortIndicator" stdset="0">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="headerStretchLastSection">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>名称</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>大小</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>链接</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>来源</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+    </column>
+    <item>
+     <property name="text">
+      <string>1</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+     <property name="text">
+      <string>2</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLineEdit" name="filter_lineedit">
+    <property name="geometry">
+     <rect>
+      <x>831</x>
+      <y>54</y>
+      <width>157</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="use_filter_checkbox">
+    <property name="geometry">
+     <rect>
+      <x>1002</x>
+      <y>54</y>
+      <width>70</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>名称包含</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>948</x>
+      <y>87</y>
+      <width>28</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>864</x>
+      <y>87</y>
+      <width>28</width>
+      <height>19</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>831</x>
+      <y>87</y>
+      <width>34</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>大于:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>915</x>
+      <y>87</y>
+      <width>34</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>小于:</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="use_filter_checkbox_2">
+    <property name="geometry">
+     <rect>
+      <x>1002</x>
+      <y>87</y>
+      <width>67</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>大小限制</string>
+    </property>
+   </widget>
+   <widget class="QTreeWidget" name="treeWidget">
+    <property name="geometry">
+     <rect>
+      <x>828</x>
+      <y>153</y>
+      <width>240</width>
+      <height>313</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <attribute name="headerDefaultSectionSize">
+     <number>50</number>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>启用</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>名称</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>828</x>
+      <y>132</y>
+      <width>58</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>来源选项:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>993</x>
+      <y>126</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>编辑源</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>897</x>
+      <y>87</y>
+      <width>16</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>MB</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>981</x>
+      <y>87</y>
+      <width>16</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>MB</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1087</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>配置</string>
+    </property>
+    <addaction name="action"/>
+    <addaction name="action_2"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <action name="action">
+   <property name="text">
+    <string>配置源</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>导入配置</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
