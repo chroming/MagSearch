@@ -111,32 +111,6 @@
       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
      </property>
     </column>
-    <item>
-     <property name="text">
-      <string>1</string>
-     </property>
-     <property name="textAlignment">
-      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
-     </property>
-     <property name="text">
-      <string>4</string>
-     </property>
-     <property name="textAlignment">
-      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
-     </property>
-     <property name="text">
-      <string>3</string>
-     </property>
-     <property name="textAlignment">
-      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
-     </property>
-     <property name="text">
-      <string>2</string>
-     </property>
-     <property name="textAlignment">
-      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
-     </property>
-    </item>
    </widget>
    <widget class="QLineEdit" name="filter_lineedit">
     <property name="geometry">
@@ -161,7 +135,7 @@
      <string>名称包含</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="less_than_lineedit">
     <property name="geometry">
      <rect>
       <x>948</x>
@@ -171,7 +145,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="more_than_lineedit">
     <property name="geometry">
      <rect>
       <x>864</x>
@@ -207,7 +181,7 @@
      <string>小于:</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="use_filter_checkbox_2">
+   <widget class="QCheckBox" name="size_limit_checkbox">
     <property name="geometry">
      <rect>
       <x>1002</x>
@@ -220,7 +194,7 @@
      <string>大小限制</string>
     </property>
    </widget>
-   <widget class="QTreeWidget" name="treeWidget">
+   <widget class="QTreeWidget" name="source_treewidget">
     <property name="geometry">
      <rect>
       <x>828</x>
@@ -266,19 +240,6 @@
     </property>
     <property name="text">
      <string>来源选项:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>993</x>
-      <y>126</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>编辑源</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
