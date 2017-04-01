@@ -2,6 +2,7 @@
 
 import requests
 from crawl_info import *
+from tools import logwap
 
 
 class MagRequests(object):
@@ -66,25 +67,28 @@ class AliRequest(MagRequests):
         result = self.web_get(url)
         # return re_search(result, r'%s' % 'magnet:\?xt=urn:btih:\S{40}')
         return re_search(result,
+                         u'<p class=\'dd name\'><strong>(.*?\.torrent)</strong></p>.*?'
                          u'种子哈希：<b>(\w{40})</b><br />\s+文件数目：<b>(\d+)</b>个文件 <br />\s+'
                          u'文件大小：<b>.{1,20}</b>或<b>([\d,]+) Bytes</b><br />\s+收录时间：<b>(.*?)</b><br />\s+'
                          u'已经下载：<b>(\d+)</b>次<br />\s+下载速度：<b>.*?</b><br />\s+最近下载：<b>.*?</b></p>')
-        # return re_search(result, u'种子哈希：<b>(.*?)<b>')
 
-    def show_mag_result(self):
-        """
-        [[(u'bacac95472354ae0000e4f127f85b21a20897302', u'11', u'1,673,258,869', u'2016-08-19 22:30:19', u'17604')],……]
-        """
+    @logwap
+    def choice_result(self, url):
+        result = self.get_mag_result(url)[0]
+        print result
+        return [result[0], result[3], u'magnet:?xt=urn:btih:'+ result[1], 'alicili.org']
+
+    def get_all_mag_result(self):
         url_list = self.show_result()
         mag_list = []
         for url in url_list:
-            mag_list.append(self.get_mag_result(url))
+            mag_list.append(self.choice_result(url))
         return mag_list
 
 if __name__ == '__main__':
     a = AliRequest()
     a.search_keyword('soe-917')
-    a.show_mag_result()
+    a.get_all_mag_result()
 
 
 
