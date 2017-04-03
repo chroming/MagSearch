@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import logging
 from functools import wraps
+import requests
 
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
@@ -9,17 +10,43 @@ console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 
 
-def logwap(func):
+def log_wrap(func):
     """
     输出函数参数作为日志的装饰器
-    调用choice_sli 将单条日志长度限制在limit_len个字符串内
-    :param func: 装饰的函数
-    :return: 装饰后的函数
     """
     @wraps(func)
     def wrapper(*args, **kwargs):
-        logging.info("ARG INFO: %s %s %s" % (func.__name__, args, kwargs))
+        # logging.info("ARG INFO: %s %s %s" % (func.__name__, args, kwargs))
+        print("ARG INFO: %s %s %s" % (func.__name__, args, kwargs))
         return func(*args, **kwargs)
+    return wrapper
+
+requests_error = {
+    'TIMEOUT!': u"访问超时!",
+    'NETWORKERROR!': u"网络连接错误!",
+    'SERVERRETURNERROR!': u"服务器返回错误!",
+    'UNKNOWNERROR!': u"未知网络错误!"
+}
+
+
+def requests_error_wrap(func):
+    """
+    requests的错误装饰器
+    用于在requests网络访问错误时输出错误类型而不是raise error
+    """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            result = func(*args, **kwargs)
+            return result
+        except requests.exceptions.Timeout:
+            return 'TIMEOUT!'
+        except requests.exceptions.ConnectionError:
+            return 'NETWORKERROR!'
+        except requests.exceptions.HTTPError:
+            return 'SERVERRETURNERROR!'
+        except Exception, e:
+            return 'UNKNOWNERROR!'
     return wrapper
 
 
@@ -34,3 +61,11 @@ class QtToPython(object):
     @staticmethod
     def get_line_edit_string(line_edit):
         return line_edit.text().toUtf8().data()
+
+    @staticmethod
+    def get_line_edit_int(line_edit):
+        return int(line_edit.text().toUtf8().data())
+
+    @staticmethod
+    def get_current_item_string(tree_widget, column):
+        return tree_widget.currentItem().text(column).toUtf8().data() if tree_widget.currentItem() else ''
