@@ -16,6 +16,18 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1087</width>
+    <height>529</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1087</width>
+    <height>529</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>MagSearch</string>
   </property>
@@ -31,6 +43,9 @@
       <width>715</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::DefaultContextMenu</enum>
     </property>
    </widget>
    <widget class="QPushButton" name="search_pushbutton">
@@ -60,6 +75,9 @@
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::CustomContextMenu</enum>
     </property>
     <attribute name="headerVisible">
      <bool>true</bool>
@@ -195,6 +213,9 @@
     </property>
    </widget>
    <widget class="QTreeWidget" name="source_treewidget">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>828</x>
@@ -271,6 +292,9 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menuBar">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>0</x>

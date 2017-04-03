@@ -45,3 +45,11 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.xml___jb_tmp___
+*.xml
+.idea/MagSearch.iml
+*.xml
+*.xml
+.idea/vcs.xml
+.idea/vcs.xml
+*.pyc
