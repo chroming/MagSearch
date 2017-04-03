@@ -53,3 +53,10 @@ Temporary Items
 .idea/vcs.xml
 .idea/vcs.xml
 *.pyc
+*.exe
+*.toc
+build/main_search/out00-PYZ.pyz
+*.manifest
+build/main_search/out00-PKG.pkg
+build/main_search/warnmain_search.txt
+*.spec

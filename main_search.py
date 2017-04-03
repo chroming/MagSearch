@@ -5,14 +5,14 @@ import sys
 from search_mag import AliRequest
 from tools import QtToPython, log_wrap, requests_error
 from result_filter import ResultFilter
-
-Ui_MainWindow, QtBaseClass = uic.loadUiType('mag_search.ui')
+from mag_search_ui import Ui_MainWindow
 
 
 class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
     def __init__(self):
         super(MainSearchUi, self).__init__()
         self.setupUi(self)
+        self.setWindowTitle('MagSearch V0.0.1')
         self.ali = AliRequest()
         self.search_pushbutton.clicked.connect(self.search_button_clicked)
         self.result_treewidget.customContextMenuRequested.connect(self.result_tree_widget_context)
