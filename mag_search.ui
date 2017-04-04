@@ -259,12 +259,12 @@
      <rect>
       <x>828</x>
       <y>132</y>
-      <width>58</width>
+      <width>130</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>来源选项:</string>
+     <string>来源选项:(待添加功能)</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -307,14 +307,6 @@
      <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>配置</string>
-    </property>
-    <addaction name="action"/>
-    <addaction name="action_2"/>
-   </widget>
-   <addaction name="menu"/>
   </widget>
   <action name="action">
    <property name="text">
