@@ -6,6 +6,7 @@ from search_mag import AliRequest
 from tools import QtToPython, log_wrap, requests_error
 from result_filter import ResultFilter
 from mag_search_ui import Ui_MainWindow
+from web_thread import WebThread
 
 
 class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
@@ -13,7 +14,6 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         super(MainSearchUi, self).__init__()
         self.setupUi(self)
         self.setWindowTitle('MagSearch V0.0.1')
-        self.ali = AliRequest()
         self.search_pushbutton.clicked.connect(self.search_button_clicked)
         self.result_treewidget.customContextMenuRequested.connect(self.result_tree_widget_context)
 
@@ -27,9 +27,12 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         self.search_clear()
         search_text = self.get_search_text()
         self.show_status(u"开始搜索 %s , 请稍后……" % search_text)
-        self.ali.search_keyword(search_text)
-        QtCore.QCoreApplication.processEvents()
-        self.filter_before_show(self.ali.get_all_mag_result())
+        self.web_thread = WebThread(search_text, AliRequest)
+        self.web_thread.finishSignal.connect(self.web_thread_finished)
+        self.web_thread.start()
+
+    def web_thread_finished(self, all_mag_list):
+        self.filter_before_show(all_mag_list)
 
     def search_clear(self):
         self.result_treewidget.clear()
