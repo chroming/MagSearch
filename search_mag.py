@@ -2,7 +2,7 @@
 
 import requests
 from crawl_info import *
-from tools import log_wrap, requests_error_wrap
+from tools import log_wrap, requests_error_wrap, time_sleep, requests_error
 
 
 class MagRequests(object):
@@ -32,9 +32,11 @@ class MagRequests(object):
     def postdata(self):
         return self.__make_postdata__()
 
+    @time_sleep
     def web_get(self, url=None):
         return requests.get(url if url else self.url, headers=self.header, timeout=10).text
 
+    @time_sleep
     def web_post(self, url=None):
         return requests.post(url if url else self.url, headers=self.header, data=self.postdata, timeout=10).text
 
@@ -71,6 +73,7 @@ class AliRequest(MagRequests):
                 all_mag_page_url.extend(self.get_mag_page_url(url))
         return all_mag_page_url
 
+    @requests_error_wrap
     def show_result(self):
         return self.get_all_mag_page_url()
 
@@ -84,14 +87,16 @@ class AliRequest(MagRequests):
                          u'已经下载：<b>(\d+)</b>次<br />\s+下载速度：<b>.*?</b><br />\s+最近下载：<b>.*?</b></p>')
 
     @log_wrap
+    @requests_error_wrap
     def choice_result(self, url):
         result = self.get_mag_result(url)[0]
         return [result[0], result[3], u'magnet:?xt=urn:btih:' + result[1], 'alicili.org']
 
-    @requests_error_wrap
     def get_all_mag_result(self):
         self.next_page_num = False
         url_list = self.show_result()
+        if isinstance(url_list, basestring) and url_list in requests_error:
+            return url_list
         mag_list = []
         for url in url_list:
             mag_list.append(self.choice_result(url))
