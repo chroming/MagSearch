@@ -30,6 +30,8 @@ requests_error = {
     'UNKNOWNERROR!': u"未知网络错误!"
 }
 
+requests_error_list = [['TIMEOUT!'], ['NETWORKERROR!'], ['SERVERRETURNERROR!'], ['UNKNOWNERROR!']]
+
 
 def requests_error_wrap(func):
     """
@@ -42,13 +44,13 @@ def requests_error_wrap(func):
             result = func(*args, **kwargs)
             return result
         except requests.exceptions.Timeout:
-            return 'TIMEOUT!'
+            return ['TIMEOUT!']
         except requests.exceptions.ConnectionError:
-            return 'NETWORKERROR!'
+            return ['NETWORKERROR!']
         except requests.exceptions.HTTPError:
-            return 'SERVERRETURNERROR!'
+            return ['SERVERRETURNERROR!']
         except Exception, e:
-            return 'UNKNOWNERROR!'
+            return ['UNKNOWNERROR!']
     return wrapper
 
 

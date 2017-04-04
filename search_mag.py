@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import requests
 from crawl_info import *
-from tools import log_wrap, requests_error_wrap, time_sleep, requests_error
+from tools import *
 
 
 class MagRequests(object):
@@ -95,7 +94,7 @@ class AliRequest(MagRequests):
     def get_all_mag_result(self):
         self.next_page_num = False
         url_list = self.show_result()
-        if isinstance(url_list, basestring) and url_list in requests_error:
+        if url_list in requests_error_list:
             return url_list
         mag_list = []
         for url in url_list:

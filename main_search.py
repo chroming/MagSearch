@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from PyQt4 import QtGui, uic, QtCore
+from PyQt4 import QtGui
 import sys
 from search_mag import AliRequest
-from tools import QtToPython, log_wrap, requests_error
+from tools import *
 from result_filter import ResultFilter
 from mag_search_ui import Ui_MainWindow
 from web_thread import WebThread
@@ -39,8 +39,7 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
 
     @log_wrap
     def filter_before_show(self, result_list):
-        self.show_status(requests_error[result_list]) if (isinstance(result_list, basestring) and
-                        result_list in requests_error) else \
+        self.show_status(requests_error[result_list[0]]) if result_list in requests_error_list else \
                         self.show_search_result_list(ResultFilter()(result_list, self.get_filter_dict()))
 
     def get_filter_dict(self):
@@ -57,8 +56,8 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
     @log_wrap
     def show_search_result_list(self, result_list):
         for result in result_list:
-            self.show_status(requests_error[result_list]) if (isinstance(result, basestring) and
-                            result in requests_error) else self.show_search_result(result)
+            self.show_status(requests_error[result[0]]) if result in requests_error_list \
+                else self.show_search_result(result)
         self.show_status(u"搜索结束!", 10000)
 
     def show_search_result(self, result):
