@@ -17,14 +17,18 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         self.search_pushbutton.clicked.connect(self.search_button_clicked)
         self.result_treewidget.customContextMenuRequested.connect(self.result_tree_widget_context)
 
+    def show_status(self, message, timeout=5000):
+        return self.statusbar.showMessage(message, timeout)
+
     def get_search_text(self):
         return self.get_line_edit_unicode(self.input_lineedit)
 
     def search_button_clicked(self):
         self.search_clear()
         search_text = self.get_search_text()
+        self.show_status(u"开始搜索 %s , 请稍后……" % search_text)
         self.ali.search_keyword(search_text)
-        # QtCore.QCoreApplication.processEvents()
+        QtCore.QCoreApplication.processEvents()
         self.filter_before_show(self.ali.get_all_mag_result())
 
     def search_clear(self):
@@ -32,14 +36,9 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
 
     @log_wrap
     def filter_before_show(self, result_list):
-        if isinstance(result_list, basestring) and result_list in requests_error:
-            self.statusbar.showMessage(requests_error[result_list], 10000)
-        else:
-            self.show_search_result_list(ResultFilter()(result_list, self.get_filter_dict()))
-        '''
-        self.show_search_result_list(ResultFilter()(result_list, self.get_filter_dict())) \
-            if result_list not in requests_error else self.statusbar.showMessage(requests_error[result_list])
-        '''
+        self.show_status(requests_error[result_list]) if (isinstance(result_list, basestring) and
+                        result_list in requests_error) else \
+                        self.show_search_result_list(ResultFilter()(result_list, self.get_filter_dict()))
 
     def get_filter_dict(self):
         return {'contain': self.get_line_edit_unicode(self.filter_lineedit)
@@ -55,7 +54,9 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
     @log_wrap
     def show_search_result_list(self, result_list):
         for result in result_list:
-            self.show_search_result(result)
+            self.show_status(requests_error[result_list]) if (isinstance(result, basestring) and
+                            result in requests_error) else self.show_search_result(result)
+        self.show_status(u"搜索结束!", 10000)
 
     def show_search_result(self, result):
         return self.result_treewidget.addTopLevelItem(QtGui.QTreeWidgetItem(result))
