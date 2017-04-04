@@ -2,6 +2,8 @@
 import logging
 from functools import wraps
 import requests
+import time
+import random
 
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
@@ -47,6 +49,14 @@ def requests_error_wrap(func):
             return 'SERVERRETURNERROR!'
         except Exception, e:
             return 'UNKNOWNERROR!'
+    return wrapper
+
+
+def time_sleep(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        time.sleep(1+random.random())
+        return func(*args, **kwargs)
     return wrapper
 
 
