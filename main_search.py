@@ -13,7 +13,7 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
     def __init__(self):
         super(MainSearchUi, self).__init__()
         self.setupUi(self)
-        self.setWindowTitle('MagSearch V0.0.1')
+        self.setWindowTitle('MagSearch V0.0.2')
         self.search_pushbutton.clicked.connect(self.search_button_clicked)
         self.result_treewidget.customContextMenuRequested.connect(self.result_tree_widget_context)
 

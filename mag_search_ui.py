@@ -33,6 +33,9 @@ class Ui_MainWindow(object):
 		MainWindow.setSizePolicy(sizePolicy)
 		MainWindow.setMinimumSize(QtCore.QSize(1087, 529))
 		MainWindow.setMaximumSize(QtCore.QSize(1087, 529))
+		icon = QtGui.QIcon()
+		icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/logo/logo.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+		MainWindow.setWindowIcon(icon)
 		MainWindow.setTabShape(QtGui.QTabWidget.Rounded)
 		self.centralwidget = QtGui.QWidget(MainWindow)
 		self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
@@ -146,3 +149,4 @@ class Ui_MainWindow(object):
 		self.action.setText(_translate("MainWindow", "配置源", None))
 		self.action_2.setText(_translate("MainWindow", "导入配置", None))
 
+import source_rc
