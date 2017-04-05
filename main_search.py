@@ -13,9 +13,15 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
     def __init__(self):
         super(MainSearchUi, self).__init__()
         self.setupUi(self)
-        self.setWindowTitle('MagSearch V0.0.4')
+        self.setWindowTitle('MagSearch V0.0.5')
         self.search_pushbutton.clicked.connect(self.search_button_clicked)
         self.result_treewidget.customContextMenuRequested.connect(self.result_tree_widget_context)
+        self.resize_treewidget_column()
+
+    def resize_treewidget_column(self):
+        self.result_treewidget.setColumnWidth(0, 300)
+        self.result_treewidget.setColumnWidth(1, 100)
+        self.result_treewidget.setColumnWidth(2, 400)
 
     def show_status(self, message, timeout=5000):
         return self.statusbar.showMessage(message, timeout)

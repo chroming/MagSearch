@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1087</width>
-    <height>529</height>
+    <height>517</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>1087</width>
-    <height>529</height>
+    <height>517</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>1087</width>
-    <height>529</height>
+    <height>517</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -83,17 +83,29 @@
     <property name="contextMenuPolicy">
      <enum>Qt::CustomContextMenu</enum>
     </property>
+    <property name="indentation">
+     <number>10</number>
+    </property>
+    <property name="expandsOnDoubleClick">
+     <bool>false</bool>
+    </property>
+    <property name="columnCount">
+     <number>3</number>
+    </property>
     <attribute name="headerVisible">
      <bool>true</bool>
     </attribute>
     <attribute name="headerCascadingSectionResizes">
-     <bool>false</bool>
+     <bool>true</bool>
     </attribute>
     <attribute name="headerDefaultSectionSize">
-     <number>200</number>
+     <number>265</number>
     </attribute>
     <attribute name="headerHighlightSections">
      <bool>true</bool>
+    </attribute>
+    <attribute name="headerMinimumSectionSize">
+     <number>100</number>
     </attribute>
     <attribute name="headerShowSortIndicator" stdset="0">
      <bool>true</bool>
@@ -120,14 +132,6 @@
     <column>
      <property name="text">
       <string>链接</string>
-     </property>
-     <property name="textAlignment">
-      <set>AlignHCenter|AlignVCenter|AlignCenter</set>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>来源</string>
      </property>
      <property name="textAlignment">
       <set>AlignHCenter|AlignVCenter|AlignCenter</set>

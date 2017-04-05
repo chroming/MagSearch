@@ -89,7 +89,7 @@ class AliRequest(MagRequests):
     @requests_error_wrap
     def choice_result(self, url):
         result = self.get_mag_result(url)[0]
-        return [result[0], result[3], u'magnet:?xt=urn:btih:' + result[1], 'alicili.org']
+        return [result[0], result[3], u'magnet:?xt=urn:btih:' + result[1]]
 
     def get_all_mag_result(self):
         self.next_page_num = False
