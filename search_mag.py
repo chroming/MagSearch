@@ -101,6 +101,21 @@ class AliRequest(MagRequests):
             mag_list.append(self.choice_result(url))
         return mag_list
 
+    def get_iter_mag_result(self):
+        self.next_page_num = False
+        url_list = self.show_result()
+        if url_list in requests_error_list:
+            return self.error_generator(url_list)
+        return self.get_generator(url_list)
+
+    @staticmethod
+    def error_generator(result):
+        yield result
+
+    def get_generator(self, url_list):
+        for url in url_list:
+            yield self.choice_result(url)
+
     def get_next_page_url(self, next_page_num):
         if next_page_num and int(next_page_num[0] > 1):
             return ['http://alicili.org/list/%s/2-0-0/' % self.keyword,

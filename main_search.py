@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from PyQt4 import QtGui
+from PyQt4 import QtGui,QtCore
 import sys
 from search_mag import AliRequest
 from tools import *
@@ -13,7 +13,7 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
     def __init__(self):
         super(MainSearchUi, self).__init__()
         self.setupUi(self)
-        self.setWindowTitle('MagSearch V0.0.2')
+        self.setWindowTitle('MagSearch V0.0.4')
         self.search_pushbutton.clicked.connect(self.search_button_clicked)
         self.result_treewidget.customContextMenuRequested.connect(self.result_tree_widget_context)
 
@@ -58,6 +58,7 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         for result in result_list:
             self.show_status(requests_error[result[0]]) if result in requests_error_list \
                 else self.show_search_result(result)
+            QtCore.QCoreApplication.processEvents()
         self.show_status(u"搜索结束!", 10000)
 
     def show_search_result(self, result):

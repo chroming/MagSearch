@@ -64,7 +64,7 @@ def time_sleep(func):
 
 class QtToPython(object):
     """
-    获取Qt界面元素的Python类型属性
+    获取Qt界面元素的Python类型值
     """
     @staticmethod
     def get_line_edit_unicode(line_edit):
