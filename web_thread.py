@@ -4,7 +4,8 @@ import types
 
 
 class WebThread(QtCore.QThread):
-    finishSignal = QtCore.pyqtSignal(types.GeneratorType)
+    # finishSignal = QtCore.pyqtSignal(types.GeneratorType)
+    finishSignal = QtCore.pyqtSignal(list)
 
     def __init__(self, keyword, search_engine):
         super(WebThread, self).__init__()
@@ -14,4 +15,5 @@ class WebThread(QtCore.QThread):
     def run(self):
         # all_mag_list = self.search.get_all_mag_result()
         all_mag_list = self.search.get_iter_mag_result()
-        self.finishSignal.emit(all_mag_list)
+        for i in all_mag_list:
+            self.finishSignal.emit(i)

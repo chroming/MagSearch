@@ -44,9 +44,11 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         self.result_treewidget.clear()
 
     @log_wrap
-    def filter_before_show(self, result_list):
-        self.show_status(requests_error[result_list[0]]) if result_list in requests_error_list else \
-                        self.show_search_result_list(ResultFilter()(result_list, self.get_filter_dict()))
+    def filter_before_show(self, result):
+        #self.show_status(requests_error[result_list[0]]) if result_list in requests_error_list else \
+        #                self.show_search_result_list(ResultFilter()(result_list, self.get_filter_dict()))
+        self.show_status(requests_error[result[0]]) if result in requests_error_list \
+            else self.show_search_result(result)
 
     def get_filter_dict(self):
         return {'contain': self.get_line_edit_unicode(self.filter_lineedit)
