@@ -4,9 +4,9 @@ from PyQt4 import QtGui,QtCore
 import sys
 from search_mag import AliRequest
 from tools import *
-from result_filter import ResultFilter
 from mag_search_ui import Ui_MainWindow
 from web_thread import WebThread
+from result_filter import ResultFilter
 
 
 class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
@@ -45,10 +45,11 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
 
     @log_wrap
     def filter_before_show(self, result):
-        #self.show_status(requests_error[result_list[0]]) if result_list in requests_error_list else \
-        #                self.show_search_result_list(ResultFilter()(result_list, self.get_filter_dict()))
-        self.show_status(requests_error[result[0]]) if result in requests_error_list \
-            else self.show_search_result(result)
+        if result == ['FINISHED']:
+            return self.show_search_result(result)
+        else:
+            self.show_status(requests_error[result[0]]) if result in requests_error_list \
+                else self.show_search_result(result) if ResultFilter()(result, self.get_filter_dict(), 'one') else None
 
     def get_filter_dict(self):
         return {'contain': self.get_line_edit_unicode(self.filter_lineedit)
@@ -70,7 +71,8 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         self.show_status(u"搜索结束!", 10000)
 
     def show_search_result(self, result):
-        return self.result_treewidget.addTopLevelItem(QtGui.QTreeWidgetItem(result))
+        return self.show_status(u"搜索结束!", 50000) if result == ['FINISHED'] \
+            else self.result_treewidget.addTopLevelItem(QtGui.QTreeWidgetItem(result))
 
     def result_tree_widget_context(self):
         context_menu = QtGui.QMenu()

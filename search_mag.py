@@ -63,7 +63,7 @@ class AliRequest(MagRequests):
 
     def get_all_mag_page_url(self):
         """
-        获取所有分页的有磁力的实际地址
+        获取所有分页的磁力页面的实际地址
         """
         all_mag_page_url = self.get_mag_page_url()
         next_page_url_list = self.get_next_page_url(self.next_page_num)
@@ -76,9 +76,8 @@ class AliRequest(MagRequests):
     def show_result(self):
         return self.get_all_mag_page_url()
 
-    def get_mag_result(self, url):
+    def get_one_page_mag(self, url):
         result = self.web_get(url)
-        # return re_search(result, r'%s' % 'magnet:\?xt=urn:btih:\S{40}')
         return re_search(result,
                          u'<p class=\'dd name\'><strong>(.*?\.torrent)</strong></p>.*?'
                          u'种子哈希：<b>(\w{40})</b><br />\s+文件数目：<b>(\d+)</b>个文件 <br />\s+'
@@ -88,7 +87,7 @@ class AliRequest(MagRequests):
     @log_wrap
     @requests_error_wrap
     def choice_result(self, url):
-        result = self.get_mag_result(url)[0]
+        result = self.get_one_page_mag(url)[0]
         return [result[0], result[3], u'magnet:?xt=urn:btih:' + result[1]]
 
     def get_all_mag_result(self):
@@ -104,6 +103,9 @@ class AliRequest(MagRequests):
     def get_iter_mag_result(self):
         self.next_page_num = False
         url_list = self.show_result()
+        return self.return_result_generator(url_list)
+
+    def return_result_generator(self, url_list):
         if url_list in requests_error_list:
             return self.error_generator(url_list)
         return self.get_generator(url_list)
