@@ -38,7 +38,7 @@
 
 + 软件是用什么写的?
 
-  *此软件使用PyQt4 + Python编写, 使用Pyinstaller打包为exe程序.*
+  *此软件使用PyQt4 + Python2 编写, 使用Pyinstaller打包为exe程序.*
 
 + 软件运行时会有个黑色的窗口, 可不可以关掉?
 
