@@ -13,7 +13,7 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
     def __init__(self):
         super(MainSearchUi, self).__init__()
         self.setupUi(self)
-        self.setWindowTitle('MagSearch V0.0.5')
+        self.setWindowTitle('MagSearch V0.1.0')
         self.search_pushbutton.clicked.connect(self.search_button_clicked)
         self.result_treewidget.customContextMenuRequested.connect(self.result_tree_widget_context)
         self.resize_treewidget_column()
@@ -57,8 +57,8 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
 
     def get_size_limit_from_gui(self):
         if self.size_limit_checkbox.isChecked():
-            return [self.get_line_edit_int(self.more_than_lineedit)*1024*1024 if self.more_than_lineedit.text else 0,
-                    self.get_line_edit_int(self.less_than_lineedit)*1024*1024 if self.less_than_lineedit.text else 10000000000000]
+            return [self.get_line_edit_int(self.more_than_lineedit)*1024*1024 if self.more_than_lineedit.text() else 0,
+                    self.get_line_edit_int(self.less_than_lineedit)*1024*1024 if self.less_than_lineedit.text() else 10000000000000]
         else:
             return [False, False]
 
