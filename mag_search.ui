@@ -143,7 +143,7 @@
      <rect>
       <x>831</x>
       <y>54</y>
-      <width>157</width>
+      <width>160</width>
       <height>20</height>
      </rect>
     </property>
@@ -164,21 +164,36 @@
    <widget class="QLineEdit" name="less_than_lineedit">
     <property name="geometry">
      <rect>
-      <x>948</x>
+      <x>945</x>
       <y>87</y>
-      <width>28</width>
-      <height>20</height>
+      <width>34</width>
+      <height>19</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>8</pointsize>
+     </font>
     </property>
    </widget>
    <widget class="QLineEdit" name="more_than_lineedit">
     <property name="geometry">
      <rect>
-      <x>864</x>
+      <x>861</x>
       <y>87</y>
-      <width>28</width>
+      <width>34</width>
       <height>19</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -186,7 +201,7 @@
      <rect>
       <x>831</x>
       <y>87</y>
-      <width>34</width>
+      <width>28</width>
       <height>19</height>
      </rect>
     </property>
@@ -199,7 +214,7 @@
      <rect>
       <x>915</x>
       <y>87</y>
-      <width>34</width>
+      <width>28</width>
       <height>19</height>
      </rect>
     </property>
