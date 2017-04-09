@@ -17,6 +17,7 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         self.search_pushbutton.clicked.connect(self.search_button_clicked)
         self.result_treewidget.customContextMenuRequested.connect(self.result_tree_widget_context)
         self.resize_treewidget_column()
+        self.exist_mag_list = []
 
     def resize_treewidget_column(self):
         self.result_treewidget.setColumnWidth(0, 300)
@@ -42,14 +43,15 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
 
     def search_clear(self):
         self.result_treewidget.clear()
+        self.exist_mag_list = []
 
     @log_wrap
     def filter_before_show(self, result):
         if result == ['FINISHED']:
-            return self.show_search_result(result)
+            return self.remove_duplicate_mag(result)
         else:
             self.show_status(requests_error[result[0]]) if result in requests_error_list \
-                else self.show_search_result(result) if ResultFilter()(result, self.get_filter_dict(), 'one') else None
+                else self.remove_duplicate_mag(result) if ResultFilter()(result, self.get_filter_dict(), 'one') else None
 
     def get_filter_dict(self):
         return {'contain': self.get_line_edit_unicode(self.filter_lineedit)
@@ -66,13 +68,25 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
     def show_search_result_list(self, result_list):
         for result in result_list:
             self.show_status(requests_error[result[0]]) if result in requests_error_list \
-                else self.show_search_result(result)
+                else self.remove_duplicate_mag(result)
             QtCore.QCoreApplication.processEvents()
         self.show_status(u"搜索结束!", 10)
 
+    def remove_duplicate_mag(self, result):
+        """
+        
+        :param result: 
+        :return: 
+        """
+        if len(result) == 3:
+            if result[2] not in self.exist_mag_list:
+                self.exist_mag_list.append(result[2])
+                return self.show_search_result(result)
+        elif result == ['FINISHED']:
+            return self.show_status(u"搜索结束! 搜索到 %s 条结果! " % self.result_treewidget.topLevelItemCount(), 500)
+
     def show_search_result(self, result):
-        return self.show_status(u"搜索结束!", 50) if result == ['FINISHED'] \
-            else self.result_treewidget.addTopLevelItem(QtGui.QTreeWidgetItem(result))
+        return self.result_treewidget.addTopLevelItem(QtGui.QTreeWidgetItem(result))
 
     def result_tree_widget_context(self):
         context_menu = QtGui.QMenu()
