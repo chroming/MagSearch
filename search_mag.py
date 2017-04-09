@@ -87,6 +87,11 @@ class AliRequest(MagRequests):
     @log_wrap
     @requests_error_wrap
     def choice_result(self, url):
+        """
+        获取单磁力页面上需要的内容并组合为所需格式
+        :param url: 磁力页面url
+        :return: 所需结果, [名称, 大小, 磁力连接]
+        """
         result = self.get_one_page_mag(url)[0]
         return [result[0], result[3], u'magnet:?xt=urn:btih:' + result[1]]
 
@@ -115,6 +120,11 @@ class AliRequest(MagRequests):
         yield result
 
     def get_generator(self, url_list):
+        """
+        输入磁力页面list, 以生成器形式返回所需最终结果
+        :param url_list: 
+        :return: 
+        """
         for url in url_list:
             yield self.choice_result(url)
 

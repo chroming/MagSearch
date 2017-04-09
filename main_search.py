@@ -23,8 +23,8 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         self.result_treewidget.setColumnWidth(1, 100)
         self.result_treewidget.setColumnWidth(2, 400)
 
-    def show_status(self, message, timeout=5000):
-        return self.statusbar.showMessage(message, timeout)
+    def show_status(self, message, timeout=5):
+        return self.statusbar.showMessage(message, timeout*1000)
 
     def get_search_text(self):
         return self.get_line_edit_unicode(self.input_lineedit)
@@ -68,10 +68,10 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
             self.show_status(requests_error[result[0]]) if result in requests_error_list \
                 else self.show_search_result(result)
             QtCore.QCoreApplication.processEvents()
-        self.show_status(u"搜索结束!", 10000)
+        self.show_status(u"搜索结束!", 10)
 
     def show_search_result(self, result):
-        return self.show_status(u"搜索结束!", 50000) if result == ['FINISHED'] \
+        return self.show_status(u"搜索结束!", 50) if result == ['FINISHED'] \
             else self.result_treewidget.addTopLevelItem(QtGui.QTreeWidgetItem(result))
 
     def result_tree_widget_context(self):
