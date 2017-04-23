@@ -5,10 +5,10 @@ from PyQt4 import QtCore
 class WebThread(QtCore.QThread):
     finishSignal = QtCore.pyqtSignal(list)
 
-    def __init__(self, keyword, search_engine):
+    def __init__(self, keyword, search_engine, pgnum):
         super(WebThread, self).__init__()
         self.search = search_engine()
-        self.search.search_keyword(keyword)
+        self.search.search_keyword(keyword, pgnum)
 
     def run(self):
         mag_generator = self.search.get_iter_mag_result()

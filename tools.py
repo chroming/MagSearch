@@ -50,7 +50,7 @@ def requests_error_wrap(func):
         except requests.exceptions.HTTPError:
             return ['SERVERRETURNERROR!']
         except Exception, e:
-            return ['UNKNOWNERROR!']
+            return ['UNKNOWNERROR!%s' % e]
     return wrapper
 
 

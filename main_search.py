@@ -34,9 +34,12 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         self.search_clear()
         search_text = self.get_search_text()
         self.show_status(u"开始搜索 %s , 请稍后……" % search_text)
-        self.web_thread = WebThread(search_text, AliRequest)
+        self.web_thread = WebThread(search_text, AliRequest, self.get_page_num())
         self.web_thread.finishSignal.connect(self.web_thread_finished)
         self.web_thread.start()
+
+    def get_page_num(self):
+        return int(self.get_line_edit_unicode(self.pgnum_lineedit))
 
     def web_thread_finished(self, all_mag_list):
         self.filter_before_show(all_mag_list)

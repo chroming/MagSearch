@@ -20,9 +20,11 @@ class MagRequests(object):
         'Accept-Encoding': 'gzip, deflate',
         'DNT': '1'
     }
+        self.pgnum = 1
 
-    def search_keyword(self, keyword):
+    def search_keyword(self, keyword, pgnum=1):
         self.keyword = keyword
+        self.pgnum = pgnum
 
     def __make_postdata__(self):
         pass
@@ -48,22 +50,37 @@ class AliRequest(MagRequests):
         super(AliRequest, self).__init__()
         self.next_page_num = False
 
-    def search_keyword(self, keyword):
+    def search_keyword(self, keyword, pgnum=1):
         self.keyword = keyword
+        self.pgnum = pgnum
         self.url = 'http://alicili.org/list/%s/1-0-0/' % keyword
 
     def __make_postdata__(self):
         return {'keyword': self.keyword}
 
+    def get_page_num(self, html):
+        """
+        获取需要抓取的结果分页数
+        :param html: 
+        :return: 分页数,int
+        """
+        next_page_num = re_search(html, u'<div class=\"pages\">\s*<span>共(\d+)页</span>')
+        return min(self.pgnum, int(next_page_num[0])) if next_page_num else 1
+
     def get_mag_page_url(self, url=None):
+        """
+        获取单个分页上磁力页面的地址
+        :param url: 
+        :return: 
+        """
         html = self.web_post(url)
         if self.next_page_num == False:
-            self.next_page_num = re_search(html, u'<div class=\"pages\">\s*<span>共(\d+)页</span>')
+            self.next_page_num = self.get_page_num(html)
         return re_search(html, r'%s' % 'http://alicili.org/cili/\S*/')
 
     def get_all_mag_page_url(self):
         """
-        获取所有分页的磁力页面的实际地址
+        获取所有分页的磁力页面的地址
         """
         all_mag_page_url = self.get_mag_page_url()
         next_page_url_list = self.get_next_page_url(self.next_page_num)
@@ -72,7 +89,7 @@ class AliRequest(MagRequests):
                 all_mag_page_url.extend(self.get_mag_page_url(url))
         return all_mag_page_url
 
-    @requests_error_wrap
+    # @requests_error_wrap
     def show_result(self):
         return self.get_all_mag_page_url()
 
@@ -129,16 +146,14 @@ class AliRequest(MagRequests):
             yield self.choice_result(url)
 
     def get_next_page_url(self, next_page_num):
-        if next_page_num and int(next_page_num[0] > 1):
-            return ['http://alicili.org/list/%s/2-0-0/' % self.keyword,
-                    'http://alicili.org/list/%s/3-0-0/' % self.keyword] \
-                if int(next_page_num[0]) > 2 else ['http://alicili.org/list/%s/2-0-0/' % self.keyword]
+        if next_page_num > 1:
+            return ['http://alicili.org/list/%s/%s-0-0/' % (self.keyword, str(pn)) for pn in xrange(2, next_page_num+1)]
 
 
 if __name__ == '__main__':
     a = AliRequest()
-    a.search_keyword('变形金刚')
-    a.get_all_mag_result()
+    a.search_keyword('变形金刚', 2)
+    print a.get_all_mag_result()
 
 
 
