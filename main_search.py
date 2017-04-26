@@ -91,7 +91,7 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
                 self.exist_mag_list.append(result[2])
                 return self.show_search_result(result)
         elif result == ['FINISHED']:
-            return self.show_status(u"搜索结束! 搜索到 %s 条结果! " % self.result_treewidget.topLevelItemCount(), 500)
+            return self.show_status(u"搜索结束! 搜索到 %s 条结果! " % self.result_treewidget.topLevelItemCount(), 0)
 
     def show_search_result(self, result):
         return self.result_treewidget.addTopLevelItem(QtGui.QTreeWidgetItem(result))

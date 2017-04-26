@@ -2,6 +2,10 @@
 
 ## 使用方式
 
+### 下载
+
+[下载地址](https://github.com/chroming/MagSearch/releases)
+
 ### 安装
 
 程序无需安装, 直接运行exe文件即可.
