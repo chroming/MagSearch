@@ -2,6 +2,8 @@
 
 ## 使用方式
 
+![](http://i1.piimg.com/567571/3e5cf42d4972d9e5.png)
+
 ### 下载
 
 [下载地址](https://github.com/chroming/MagSearch/releases)
