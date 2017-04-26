@@ -28,6 +28,9 @@
     <height>517</height>
    </size>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
+  </property>
   <property name="windowTitle">
    <string>MagSearch</string>
   </property>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from PyQt4 import QtGui,QtCore
+from PyQt4 import QtGui, QtCore
 import sys
 from search_mag import AliRequest
 from tools import *
@@ -18,6 +18,11 @@ class MainSearchUi(QtGui.QMainWindow, Ui_MainWindow, QtToPython):
         self.result_treewidget.customContextMenuRequested.connect(self.result_tree_widget_context)
         self.resize_treewidget_column()
         self.exist_mag_list = []
+        self.input_lineedit.setFocus(4)
+
+    def keyPressEvent(self, e):
+        if self.input_lineedit.hasFocus() and e.key() == QtCore.Qt.Key_Return:
+            self.search_button_clicked()
 
     def resize_treewidget_column(self):
         self.result_treewidget.setColumnWidth(0, 300)
